@@ -1,0 +1,19 @@
+{
+  "name": "-mess",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "nodemon server.cjs"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
