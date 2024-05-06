@@ -12,7 +12,7 @@ const port = 3001;
 var history = [];
 var colors = ['rgba(73, 158, 255, 0.53)', 'rgba(234, 73, 255, 0.53)'];
 
-__dirname+="/../";
+//__dirname+="/../";
 
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
