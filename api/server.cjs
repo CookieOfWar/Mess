@@ -12,6 +12,8 @@ const port = 3000;
 var history = [];
 var colors = ['rgba(73, 158, 255, 0.53)', 'rgba(234, 73, 255, 0.53)'];
 
+__dirname+="/../";
+
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 
@@ -72,3 +74,6 @@ server.listen(port, () => {
 app.post("/send", (req, res) => {
   console.log(req.body);
 });
+
+
+module.exports = app;
