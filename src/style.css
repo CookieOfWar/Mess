@@ -8,8 +8,11 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+
+
 #yourMessage {
-  padding-bottom: 2em;
+  padding-bottom: 5vh;
   width: 90%;
   display: flex;
   justify-content: center;
@@ -25,10 +28,10 @@ body {
 li {
   color: rgb(170, 165, 190);
   padding-left: 2rem;
-  background-image: url("public/send_icon.png");
+  /*background-image: url("../send_icon.png");
   background-position: 0 1.2vw;
   background-size: 1.6rem 1.6rem;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
 }
 
 #textbox {
@@ -43,10 +46,29 @@ li {
 #sendButton {
   width: 2.5vw;
   height: 2.5vw;
-  background-image: url("public/send_icon.png");
+  background-image: url("../send_icon.png");
   background-size: contain;
   background-color: #41414100;
   border: 0;
   outline: 0;
   cursor: pointer;
+}
+
+.highlight {
+	color: rgba(234, 73, 255, 0.53);
+	font-weight: bold;
+}
+
+
+@media (max-width:590px){
+	#yourMessage{
+		padding-bottom: 10vh;
+	}
+	#textbox {
+		font-size: 5vw;
+	}
+	#sendButton{
+		width: 5vw;
+		height: 5vw;
+	}
 }
