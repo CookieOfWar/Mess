@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
-const port = 3000;
+const port = 3001;
 
 var history = [];
 var colors = ['rgba(73, 158, 255, 0.53)', 'rgba(234, 73, 255, 0.53)'];
