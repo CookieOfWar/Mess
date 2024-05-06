@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "build-watch": "vite build --watch",
-    "serve": "concurrently --kill-others \"vite build --watch\" \"nodemon api/server.cjs\"",
+    "serve": "concurrently --kill-others \"vite build --watch\" \"nodemon server.cjs\"",
 		"start": "node server.cjs"
   },
   "devDependencies": {
