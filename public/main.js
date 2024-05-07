@@ -26,7 +26,7 @@ clientChannel.subscribe((message) => {
   switch (message.name) {
     case "newMessage":
       addMessage(message.data["text"]);
-      //console.log("newMessage", message.data["text"]);
+      console.log("newMessage", message.data["text"]);
       break;
 
     case "setClientName":

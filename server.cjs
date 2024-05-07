@@ -42,7 +42,7 @@ serverChannel.subscribe((message) => {
       if (history.length > 10) {
         history.shift();
       }
-      clientChannel.publish("newMessage", { text: message});
+      clientChannel.publish("newMessage", { text: message.data["text"]});
       break;
 
     default:
@@ -57,7 +57,7 @@ function giveNameNRestoreHistory() {
   clientChannel.publish("setClientName", {
     name: "Посос", //data1 + " " + data2,
   });
-  console.log("history", history.data);
+  //console.log("history", history.data);
   clientChannel.publish("history", { history: history });
 
   console.log(`new user connected: ${data1 + " " + data2}`);
