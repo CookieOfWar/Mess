@@ -40,6 +40,7 @@ clientChannel.subscribe((message) => {
 
       for (let i = 0; i < message.data["history"].length; i++) {
         addMessage(message.data["history"][i].data["text"]);
+				console.log(message.data["history"]);
       }
       break;
 
