@@ -12,7 +12,7 @@
   "routes": [
     {
       "source": "/(.*)",
-      "destination": "/server.cjs"
+      "destination": "server.cjs"
     }
   ]
 }
