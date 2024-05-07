@@ -39,6 +39,7 @@ serverChannel.subscribe((message) => {
       break;
     case "sendMessage":
       history.push(message.data["text"]);
+			console.log(message);
       if (history.length > 10) {
         history.shift();
       }
