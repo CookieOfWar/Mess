@@ -71,6 +71,7 @@ textbox.addEventListener("keyup", (event) => {
 function SendClick() {
   serverChannel.publish("sendMessage", {
     text: clientName + ": " + textbox.value,
+		tbValue: `${textbox.value}`.trim(),
 		color: messageColor
   });
   //const res = createFetch("/sendMessage", {

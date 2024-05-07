@@ -52,8 +52,8 @@ serverChannel.subscribe((message) => {
 			else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
-			if (message.data["text"].startsWith("/")) {
-				applyCommands(message.data["text"].str.substring(1));
+			if (message.data["tbValue"].startsWith("/")) {
+				applyCommands(message.data["tbValue"].str.substring(1));
 			}
       history.push(message.data["text"]);
       if (history.length > 10) {
