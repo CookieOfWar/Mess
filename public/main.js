@@ -45,6 +45,10 @@ clientChannel.subscribe((message) => {
       }
       break;
 
+		case "cls":
+			messages.innerHTML = "";
+			break;
+
     default:
       //console.log(message);
       break;
@@ -88,3 +92,4 @@ function addMessage(messageText, nameColor) {
     messages.removeChild(messages.firstChild);
   }
 }
+
