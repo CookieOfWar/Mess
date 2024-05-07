@@ -17,7 +17,7 @@ app.use(express.static(path.resolve(__dirname, "dist")));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist") + "/index.html");
+  res.sendFile(path.resolve(__dirname, "index.html"));
 });
 
 //Ably
@@ -25,7 +25,7 @@ const key = "3JcURg.fOPmbg:efBqHXpjjaogZHqRcPvOOsPuiyJJt7y0UCTcQwI_GAA";
 const realtime = new Ably.Realtime(key);
 var serverChannel = realtime.channels.get("server-ch");
 var clientChannel = realtime.channels.get("client-ch");
-console.log(serverChannel, clientChannel);
+//console.log(serverChannel, clientChannel);
 clientChannel.publish("update", { time: Date.now() });
 //
 
