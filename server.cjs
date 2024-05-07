@@ -63,7 +63,7 @@ function giveNameNRestoreHistory() {
 	data2 = adjectives[0];
   console.log(data1 + " " + data2);
   clientChannel.publish("setClientName", {
-    name: data1 + " " + data2,
+    name: "Посос",//data1 + " " + data2,
   });
   clientChannel.publish("history", { history: history });
 

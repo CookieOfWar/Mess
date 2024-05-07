@@ -5,6 +5,7 @@ const textbox = document.getElementById("textbox");
 const sendButton = document.getElementById("yourMessage");
 
 var clientName = "";
+var messageColor = "";
 //const socket = io();
 
 async function createFetch(api, body) {
