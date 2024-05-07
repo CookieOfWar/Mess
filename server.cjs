@@ -8,7 +8,7 @@ const Ably = require("ably");
 const app = express();
 const server = http.createServer(app);
 //const io = new Server(server);
-const port = 3000;
+const port = 3001;
 
 var history = [];
 var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
@@ -90,68 +90,6 @@ function giveNameNRestoreHistory() {
 
   console.log(`new user connected: ${data1[0] + " " + data2[0]}`);
 }
-
-/*
-async function doPubSub() {
-  await realtime.connection.once("connected");
-  console.log("Working");
-
-  const channel = realtime.channels.get("main-ch");
-
-  channel.subscribe((message) => {
-    console.table(message);
-  });
-  channel.publish("update", "Hello, Ably!");
-}
-doPubSub();*/
-
-/* Old with IO
-io.on("connection", (socket) => {
-  fetch("https://random-word-form.herokuapp.com/random/adjective")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data1) => {
-      fetch("https://random-word-form.herokuapp.com/random/noun")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data2) => {
-          console.log(data1[0] + " " + data2[0]);
-          socket.emit("setClientName", data1[0] + " " + data2[0]);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-
-  console.log(`new user connected: ${socket.id}`);
-
-  socket.emit("history", history);
-
-  socket.on("sendMessage", (message) => {
-    //console.log(message);
-    history.push(message);
-    if (history.length > 10) {
-      history.shift();
-    }
-    io.emit("newMessage", message);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
-});
-*/
 
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

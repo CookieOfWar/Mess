@@ -1,5 +1,6 @@
 {
   "version": 2,
+	"buildCommand": "npm run build",
   "builds": [
     {
       "src": "server.cjs",
@@ -12,12 +13,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "server.cjs"
-    },
-    {
       "src": "/",
       "dest": "/public/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server.cjs"
     }
   ]
 }
