@@ -16,9 +16,9 @@ var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
 app.use(express.static(path.resolve(__dirname, "dist")));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "index.html"));
-});
+//app.get("/", (req, res) => {
+//  res.sendFile(path.resolve(__dirname, "index.html"));
+//});
 
 //Ably
 const key = "3JcURg.fOPmbg:efBqHXpjjaogZHqRcPvOOsPuiyJJt7y0UCTcQwI_GAA";
@@ -157,8 +157,8 @@ server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-app.post("/send", (req, res) => {
-  console.log(req.body);
+app.post("/privet", (req, res) => {
+  res.send({ benis: "true!!!" });
 });
 
 module.exports = app;
