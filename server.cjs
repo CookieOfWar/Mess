@@ -1,4 +1,4 @@
-const {adjectives, nouns} = require("./adjNnouns");
+const {adjectives, nouns} = require("./adjNnouns.cjs");
 
 const path = require("path");
 const express = require("express");

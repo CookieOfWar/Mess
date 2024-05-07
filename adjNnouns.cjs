@@ -1,4 +1,4 @@
-export const adjectives = [
+const adjectives = [
   "aback",
   "abaft",
   "abandoned",
@@ -1100,7 +1100,7 @@ export const adjectives = [
   "zonked",
 ];
 
-export const nouns = [
+const nouns = [
   "accelerator",
   "accordion",
   "account",
@@ -3435,3 +3435,5 @@ export const nouns = [
   "zoo",
   "zoology",
 ];
+
+module.exports = { adjectives, nouns };
