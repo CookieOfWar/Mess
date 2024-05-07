@@ -1,4 +1,4 @@
-const {adjectives, nouns} = require("./adjNnouns.cjs");
+const { adjectives, nouns } = require("./adjNnouns.cjs");
 
 const path = require("path");
 const express = require("express");
@@ -19,11 +19,7 @@ const colors = [
   "rgba(73, 203, 255, 0.53)",
 ];
 
-const commands=[
-	"/cls",
-	"/clearHistory",
-	
-]
+const commands = ["/cls", "/clearHistory"];
 
 /**
  * НЕ МЕНЯТЬ СЦУККО
@@ -48,19 +44,22 @@ serverChannel.subscribe((message) => {
     case "connected":
       if (message.data["name"] == "") {
         giveNameNRestoreHistory();
-      } 
-			else clientChannel.publish("history", { history: history });
+      } else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
-			if (message.data["tbValue"].startsWith("/")) {
-				applyCommands(message.data["tbValue"].str.substring(1));
-			}
-      history.push(message.data["text"]);
-      if (history.length > 10) {
-        history.shift();
+      if (message.data["tbValue"].startsWith("/")) {
+        applyCommands(message.data["tbValue"].str.substring(1));
+      } else {
+        history.push(message.data["text"]);
+        if (history.length > 10) {
+          history.shift();
+        }
+        console.log(message);
+        clientChannel.publish("newMessage", {
+          text: message.data["text"],
+          color: message.data["color"],
+        });
       }
-			console.log(message);
-      clientChannel.publish("newMessage", { text: message.data["text"], color: message.data["color"] });
       break;
 
     default:
@@ -92,14 +91,14 @@ function getRandInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-
-function applyCommands(command){
-	switch(command){
-		case "cls":
-			clientChannel.publish("cls");
-			break;
-		case "clearHistory":
-			history = [];
-			break;
-	}
+function applyCommands(command) {
+	console.log(command);
+  switch (command) {
+    case "cls":
+      clientChannel.publish("cls");
+      break;
+    case "clearHistory":
+      history = [];
+      break;
+  }
 }

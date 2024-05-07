@@ -46,7 +46,7 @@ clientChannel.subscribe((message) => {
       break;
 
 		case "cls":
-			messages.innerHTML = "";
+			messages.empty();
 			break;
 
     default:
