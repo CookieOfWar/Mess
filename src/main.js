@@ -54,6 +54,7 @@ sendButton.addEventListener("click", SendClick);
 textbox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     SendClick();
+		console.log("Pressed Enter");
   }
 });
 
