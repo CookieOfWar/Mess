@@ -64,7 +64,9 @@ async function SendClick() {
   //serverChannel.publish("sendMessage", {
   //  text: clientName + ": " + textbox.value,
   //});
-	const res = await createFetch("/sendMessage", {text: clientName + ": " + textbox.value});
+  const res = createFetch("/sendMessage", {
+    text: clientName + ": " + textbox.value,
+  }).then((res) => console.log(res));
   textbox.value = "";
 }
 

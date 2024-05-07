@@ -13,11 +13,11 @@ const port = 3000;
 var history = [];
 var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
 
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.resolve(__dirname, "dist")));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
 //Ably
@@ -32,6 +32,7 @@ clientChannel.publish("update", { time: Date.now() });
 app.post("/sendMessage", (req, res) => {
   //console.log(req);
   clientChannel.publish("newMessage", { text: req.body["text"] });
+  res.send({ benis: "true!!!" });
 });
 
 serverChannel.subscribe((message) => {

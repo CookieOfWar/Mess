@@ -4,20 +4,12 @@
     {
       "src": "server.cjs",
       "use": "@vercel/node"
-    },
-    {
-      "src": "dist/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/((?!.*\\.\\w+$).*)",
+      "src": "/(.*)",
       "dest": "server.cjs"
-    },
-    {
-      "src": "/(.+\\.[a-z]+)$",
-      "dest": "/dist/$1"
     }
   ]
 }
