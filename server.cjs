@@ -30,7 +30,7 @@ clientChannel.publish("update", { time: Date.now() });
 //
 
 
-app.get("/sendMessage", (req, res) => {
+app.post("/sendMessage", (req, res) => {
 //console.log(req);
 	clientChannel.publish("newMessage", { text: req.body["text"] });
 })
