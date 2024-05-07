@@ -1,4 +1,4 @@
-import { adjectives, nouns } from "./adjNnouns";
+const {adjectives, nouns} = require("./adjNnouns");
 
 const path = require("path");
 const express = require("express");
