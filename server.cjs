@@ -42,13 +42,15 @@ serverChannel.subscribe((message) => {
     case "connected":
       if (message.data["name"] == "") {
         giveNameNRestoreHistory();
-      } else clientChannel.publish("history", { history: history });
+      } 
+			//else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
       history.push(message.data["text"]);
       if (history.length > 10) {
         history.shift();
       }
+			console.log(message);
       clientChannel.publish("newMessage", { text: message.data["text"] });
       break;
 
@@ -66,7 +68,7 @@ function giveNameNRestoreHistory() {
     color: colors[getRandInt(0, colors.length)],
   });
   //console.log("history", history.data);
-  clientChannel.publish("history", { history: history });
+  //clientChannel.publish("history", { history: history });
 
   console.log(`new user connected: ${data1 + " " + data2}`);
 }
