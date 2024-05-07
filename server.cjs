@@ -9,6 +9,8 @@ const app = express();
 const server = http.createServer(app);
 const port = 3000;
 
+// var enabledNotifications = [""];
+
 var history = [];
 const colors = [
   "rgba(73, 158, 255, 0.53)",
@@ -35,9 +37,10 @@ var clientChannel = realtime.channels.get("client-ch");
 //clientChannel.publish("update", { time: Date.now() });
 //
 
-//app.post("/sendMessage", (req, res) => {
-//  clientChannel.publish("newMessage", { text: req.body["text"] });
-//});
+// app.post("/checkNotifications", (req, res) => {
+//   if (enabledNotifications.includes(req.body.name)) res.send(true);
+//   else res.send(false);
+// });
 
 serverChannel.subscribe((message) => {
   switch (message.name) {
@@ -58,6 +61,7 @@ serverChannel.subscribe((message) => {
         clientChannel.publish("newMessage", {
           text: message.data["text"],
           color: message.data["color"],
+          name: message.data["name"],
         });
       }
       break;

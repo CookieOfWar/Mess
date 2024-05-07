@@ -2,10 +2,11 @@ import { clientChannel, serverChannel } from "./able";
 
 const messages = document.getElementById("messages");
 const textbox = document.getElementById("textbox");
-const sendButton = document.getElementById("yourMessage");
+const sendButton = document.getElementById("sendButton");
 
 var clientName = "";
 var messageColor = "";
+var enabledNotifications = true;
 
 async function createFetch(api, body) {
   return fetch(api, {
@@ -19,7 +20,11 @@ async function createFetch(api, body) {
 
 // Ably
 
-window.onload = () => {};
+window.onload = () => {
+  // if (!localStorage.getItem("client")) {
+  //   localStorage.setItem("client", Date.now());
+  // }
+};
 serverChannel.publish("connected", { name: clientName });
 
 clientChannel.subscribe((message) => {
@@ -45,10 +50,10 @@ clientChannel.subscribe((message) => {
       }
       break;
 
-		case "cls":
-			console.log("emptiness");
-			while(messages.firstChild) messages.removeChild(messages.firstChild);
-			break;
+    case "cls":
+      console.log("emptiness");
+      while (messages.firstChild) messages.removeChild(messages.firstChild);
+      break;
 
     default:
       //console.log(message);
@@ -57,14 +62,15 @@ clientChannel.subscribe((message) => {
 });
 //
 
-sendButton.addEventListener("submit", (e) => {
-  e.preventDefault();
-  SendClick;
+sendButton.addEventListener("click", (e) => {
+  // e.preventDefault();
+  if (textbox.value != "") SendClick();
 });
 
 textbox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
-    SendClick();
+    if (textbox.value != "") SendClick();
+
     //console.log("Pressed Enter");
   }
 });
@@ -72,8 +78,9 @@ textbox.addEventListener("keyup", (event) => {
 function SendClick() {
   serverChannel.publish("sendMessage", {
     text: clientName + ": " + textbox.value,
-		tbValue: `${textbox.value}`.trim(),
-		color: messageColor
+    tbValue: `${textbox.value}`.trim(),
+    color: messageColor,
+    name: clientName,
   });
   //const res = createFetch("/sendMessage", {
   //  text: clientName + ": " + textbox.value,
@@ -94,4 +101,3 @@ function addMessage(messageText, nameColor) {
     messages.removeChild(messages.firstChild);
   }
 }
-

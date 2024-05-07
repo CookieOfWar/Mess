@@ -32,7 +32,6 @@ li {
   font-size: 3vw;
 }
 
-
 #textbox {
   width: 80%;
   background-color: #555555;
@@ -45,7 +44,7 @@ li {
 #sendButton {
   width: 2.5vw;
   height: 2.5vw;
-  background-image: url("../send_icon.png");
+  background-image: url("./send_icon.png");
   background-size: contain;
   background-color: #41414100;
   border: 0;
