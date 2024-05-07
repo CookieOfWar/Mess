@@ -18,29 +18,30 @@ async function createFetch(api, body) {
 }
 
 // Ably
+
+window.onload = () => {};
 serverChannel.publish("connected", { name: clientName });
 
 clientChannel.subscribe((message) => {
   switch (message.name) {
     case "newMessage":
       addMessage(message.data["text"]);
-      console.log("newMessage", message.data["text"]);
+      //console.log("newMessage", message.data["text"]);
       break;
 
     case "setClientName":
       if (clientName == "") clientName = message.data["name"];
-      console.log(message);
       break;
 
     case "history":
-      console.log(message);
+      //console.log(message.data["history"]);
       for (let i = 0; i < message.data["history"].length; i++) {
-        addMessage(message.data["history"][i].data["text"]);
+        addMessage(message.data["history"][i]);
       }
       break;
 
     default:
-      console.log(message);
+      //console.log(message);
       break;
   }
 });
@@ -54,17 +55,17 @@ sendButton.addEventListener("submit", (e) => {
 textbox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     SendClick();
-    console.log("Pressed Enter");
+    //console.log("Pressed Enter");
   }
 });
 
 function SendClick() {
-  //serverChannel.publish("sendMessage", {
-  //  text: clientName + ": " + textbox.value,
-  //});
-  const res = createFetch("/sendMessage", {
+  serverChannel.publish("sendMessage", {
     text: clientName + ": " + textbox.value,
-  }).then((res) => console.log(res));
+  });
+  //const res = createFetch("/sendMessage", {
+  //  text: clientName + ": " + textbox.value,
+  //}).then((res) => console.log(res));
   textbox.value = "";
 }
 

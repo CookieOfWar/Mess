@@ -5,7 +5,7 @@ const Ably = require("ably");
 
 const app = express();
 const server = http.createServer(app);
-const port = 3001;
+const port = 3000;
 
 var history = [];
 const noun = ["Big"];
@@ -23,12 +23,12 @@ const key = "3JcURg.fOPmbg:efBqHXpjjaogZHqRcPvOOsPuiyJJt7y0UCTcQwI_GAA";
 const realtime = new Ably.Realtime(key);
 var serverChannel = realtime.channels.get("server-ch");
 var clientChannel = realtime.channels.get("client-ch");
-clientChannel.publish("update", { time: Date.now() });
+//clientChannel.publish("update", { time: Date.now() });
 //
 
-app.post("/sendMessage", (req, res) => {
-  clientChannel.publish("newMessage", { text: req.body["text"] });
-});
+//app.post("/sendMessage", (req, res) => {
+//  clientChannel.publish("newMessage", { text: req.body["text"] });
+//});
 
 serverChannel.subscribe((message) => {
   switch (message.name) {
@@ -38,13 +38,11 @@ serverChannel.subscribe((message) => {
       } else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
-      console.log(message);
       history.push(message.data["text"]);
-      console.log(message);
       if (history.length > 10) {
         history.shift();
       }
-      clientChannel.publish("newMessage", { text: message.data["text"] });
+      clientChannel.publish("newMessage", { text: message});
       break;
 
     default:
@@ -59,7 +57,7 @@ function giveNameNRestoreHistory() {
   clientChannel.publish("setClientName", {
     name: "Посос", //data1 + " " + data2,
   });
-  console.log("history", history);
+  console.log("history", history.data);
   clientChannel.publish("history", { history: history });
 
   console.log(`new user connected: ${data1 + " " + data2}`);
