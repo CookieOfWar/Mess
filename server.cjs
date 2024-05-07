@@ -40,7 +40,7 @@ serverChannel.subscribe((message) => {
       if (history.length > 10) {
         history.shift();
       }
-      // console.log(message.data["text"]);
+       console.log(message.data["text"]);
       clientChannel.publish("newMessage", { text: message.data["text"] });
       break;
 
