@@ -16,7 +16,7 @@ var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
