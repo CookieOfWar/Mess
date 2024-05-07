@@ -61,9 +61,10 @@ textbox.addEventListener("keyup", (event) => {
 });
 
 async function SendClick() {
-  serverChannel.publish("sendMessage", {
-    text: clientName + ": " + textbox.value,
-  });
+  //serverChannel.publish("sendMessage", {
+  //  text: clientName + ": " + textbox.value,
+  //});
+	const res = await createFetch("sendMessage", {text: clientName + ": " + textbox.value});
   textbox.value = "";
 }
 

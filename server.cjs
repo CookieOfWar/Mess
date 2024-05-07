@@ -29,6 +29,13 @@ console.log(serverChannel, clientChannel);
 clientChannel.publish("update", { time: Date.now() });
 //
 
+
+app.post("/sendMessage", (req, res) => {
+//console.log(req);
+	clientChannel.publish("newMessage", { text: req.body["text"] });
+})
+
+
 serverChannel.subscribe((message) => {
   switch (message.name) {
     case "connected":
