@@ -38,7 +38,7 @@ serverChannel.subscribe((message) => {
       } else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
-      history.push(message);
+      history.push(message.data["text"]);
       if (history.length > 10) {
         history.shift();
       }
@@ -61,7 +61,7 @@ function giveNameNRestoreHistory() {
   console.log("history", history);
   clientChannel.publish("history", { history: history });
 
-  console.log(`new user connected: ${data1[0] + " " + data2[0]}`);
+  console.log(`new user connected: ${data1 + " " + data2}`);
 }
 
 server.listen(port, () => {
