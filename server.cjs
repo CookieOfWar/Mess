@@ -1,13 +1,13 @@
 const path = require("path");
 const express = require("express");
-const socket = require("socket.io");
+//const socket = require("socket.io");
 const http = require("http");
-const { Server } = require("socket.io");
+//const { Server } = require("socket.io");
 const Ably = require("ably");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+//const io = new Server(server);
 const port = 3000;
 
 var history = [];

@@ -1,11 +1,11 @@
-import io from "socket.io-client";
+//import io from "socket.io-client";
 
 const messages = document.getElementById("messages");
 const textbox = document.getElementById("textbox");
 const sendButton = document.getElementById("sendButton");
 
 var clientName = "";
-const socket = io();
+//const socket = io();
 
 async function createFetch(api, body) {
   return fetch(api, {
