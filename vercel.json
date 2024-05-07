@@ -14,7 +14,8 @@
   "routes": [
     {
       "src": "/public",
-      "dest": "/public/index.html"
+      "dest": "/public/index.html",
+      "includeFiles": "public/**"
     },
     {
       "src": "/(.*)",
