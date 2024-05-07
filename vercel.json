@@ -5,18 +5,9 @@
     {
       "src": "server.cjs",
       "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/public",
-      "dest": "/public/index.html",
-      "includeFiles": "public/**"
-    },
     {
       "src": "/(.*)",
       "dest": "server.cjs"

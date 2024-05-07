@@ -1,8 +1,8 @@
-//import io from "socket.io-client";
+import { clientChannel, serverChannel } from "./able";
 
 const messages = document.getElementById("messages");
 const textbox = document.getElementById("textbox");
-const sendButton = document.getElementById("sendButton");
+const sendButton = document.getElementById("yourMessage");
 
 var clientName = "";
 //const socket = io();
@@ -18,10 +18,6 @@ async function createFetch(api, body) {
 }
 
 // Ably
-const key = "3JcURg.fOPmbg:efBqHXpjjaogZHqRcPvOOsPuiyJJt7y0UCTcQwI_GAA";
-const realtime = new Ably.Realtime(key);
-var serverChannel = realtime.channels.get("server-ch");
-var clientChannel = realtime.channels.get("client-ch");
 console.log(serverChannel, clientChannel);
 
 serverChannel.publish("connected", { name: clientName });
@@ -35,10 +31,12 @@ clientChannel.subscribe((message) => {
 
     case "setClientName":
       if (clientName == "") clientName = message.data["name"];
+      console.log(message);
       break;
 
     case "history":
-      console.log(message.data["history"]);
+      //console.log(message.data["history"]);
+
       for (let i = 0; i < message.data["history"].length; i++) {
         addMessage(message.data["history"][i].data["text"]);
       }
@@ -51,7 +49,10 @@ clientChannel.subscribe((message) => {
 });
 //
 
-sendButton.addEventListener("click", SendClick);
+sendButton.addEventListener("submit", (e) => {
+  e.preventDefault();
+  SendClick;
+});
 
 textbox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
@@ -60,13 +61,14 @@ textbox.addEventListener("keyup", (event) => {
   }
 });
 
-async function SendClick() {
+function SendClick() {
   //serverChannel.publish("sendMessage", {
   //  text: clientName + ": " + textbox.value,
   //});
   const res = createFetch("/sendMessage", {
     text: clientName + ": " + textbox.value,
   }).then((res) => console.log(res));
+  console.log("bibibobka");
   textbox.value = "";
 }
 

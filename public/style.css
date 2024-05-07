@@ -7,9 +7,8 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
-
-
 
 #yourMessage {
   padding-bottom: 5vh;
@@ -24,15 +23,15 @@ body {
   align-self: flex-start;
   padding-left: 10vw;
   list-style-type: none;
+  width: 90%;
 }
 li {
   color: rgb(170, 165, 190);
   padding-left: 2rem;
-  /*background-image: url("../send_icon.png");
-  background-position: 0 1.2vw;
-  background-size: 1.6rem 1.6rem;
-  background-repeat: no-repeat;*/
+  max-width: 80%;
+  font-size: 3vw;
 }
+
 
 #textbox {
   width: 80%;
@@ -55,20 +54,29 @@ li {
 }
 
 .highlight {
-	color: rgba(234, 73, 255, 0.53);
-	font-weight: bold;
+  color: rgba(234, 73, 255, 0.53);
+  font-weight: bold;
 }
 
+#nameOfMess {
+  position: absolute;
+  top: 2vh;
+  color: rgb(118, 106, 106);
+  font-size: 5vw;
+}
 
-@media (max-width:590px){
-	#yourMessage{
-		padding-bottom: 10vh;
-	}
-	#textbox {
-		font-size: 5vw;
-	}
-	#sendButton{
-		width: 5vw;
-		height: 5vw;
-	}
+@media (max-width: 590px) {
+  #yourMessage {
+    padding-bottom: 10vh;
+  }
+  #textbox {
+    font-size: 5vw;
+  }
+  #sendButton {
+    width: 5vw;
+    height: 5vw;
+  }
+  li {
+    font-size: 6vw;
+  }
 }

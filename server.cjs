@@ -11,14 +11,15 @@ const server = http.createServer(app);
 const port = 3001;
 
 var history = [];
+const noun = ["Big"];	
+const adjectives = ["Penis"];
 var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
 
+/**
+ * НЕ МЕНЯТЬ СЦУККО
+ */
 app.use(express.static(path.resolve(__dirname, "dist")));
 app.use(express.json());
-
-//app.get("/", (req, res) => {
-//  res.sendFile(path.resolve(__dirname, "index.html"));
-//});
 
 //Ably
 const key = "3JcURg.fOPmbg:efBqHXpjjaogZHqRcPvOOsPuiyJJt7y0UCTcQwI_GAA";
@@ -58,35 +59,13 @@ serverChannel.subscribe((message) => {
 });
 
 function giveNameNRestoreHistory() {
-  fetch("https://random-word-form.herokuapp.com/random/adjective")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data1) => {
-      fetch("https://random-word-form.herokuapp.com/random/noun")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data2) => {
-          console.log(data1[0] + " " + data2[0]);
-          clientChannel.publish("setClientName", {
-            name: data1[0] + " " + data2[0],
-          });
-          clientChannel.publish("history", { history: history });
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+	data1 = noun[0];
+	data2 = adjectives[0];
+  console.log(data1 + " " + data2);
+  clientChannel.publish("setClientName", {
+    name: data1 + " " + data2,
+  });
+  clientChannel.publish("history", { history: history });
 
   console.log(`new user connected: ${data1[0] + " " + data2[0]}`);
 }
@@ -95,7 +74,7 @@ server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-app.post("/privet", (req, res) => {
+app.get("/privet", (req, res) => {
   res.send({ benis: "true!!!" });
 });
 
