@@ -64,6 +64,18 @@ clientChannel.subscribe((message) => {
 
 sendButton.addEventListener("click", (e) => {
   // e.preventDefault();
+  if ("serviceWorker" in navigator) {
+    Notification.requestPermission().then((permissionResult) => {
+      navigator.serviceWorker.register("/sw.js").then((registration) => {
+        if (permissionResult === "granted") {
+          console.log("granted");
+          registration.showNotification("My first notification", {
+            body: "More details about this notification",
+          });
+        }
+      });
+    });
+  }
   if (textbox.value != "") SendClick();
 });
 
