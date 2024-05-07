@@ -25,21 +25,23 @@ serverChannel.publish("connected", { name: clientName });
 clientChannel.subscribe((message) => {
   switch (message.name) {
     case "newMessage":
-      addMessage(message.data["text"]);
+      addMessage(message.data["text"], message.data["color"]);
       console.log("newMessage", message.data["text"]);
       break;
 
     case "setClientName":
-      if (clientName == ""){
-				clientName = message.data["name"];
-				messageColor = message.data["color"];
-			}
+      if (clientName == "") {
+        clientName = message.data["name"];
+        messageColor = message.data["color"];
+      }
       break;
 
     case "history":
       //console.log(message.data["history"]);
-      for (let i = 0; i < message.data["history"].length; i++) {
-        addMessage(message.data["history"][i]);
+      if (messages.children.length == 0) {
+        for (let i = 0; i < message.data["history"].length; i++) {
+          addMessage(message.data["history"][i]);
+        }
       }
       break;
 
@@ -65,6 +67,7 @@ textbox.addEventListener("keyup", (event) => {
 function SendClick() {
   serverChannel.publish("sendMessage", {
     text: clientName + ": " + textbox.value,
+		color: messageColor
   });
   //const res = createFetch("/sendMessage", {
   //  text: clientName + ": " + textbox.value,
@@ -72,10 +75,10 @@ function SendClick() {
   textbox.value = "";
 }
 
-function addMessage(messageText) {
+function addMessage(messageText, nameColor) {
   const message = document.createElement("li"); // style='color: ${'rgba(73, 158, 255, 0.53)'}
   message.innerHTML =
-    `<span class='highlight' style='color: ${messageColor}'>` +
+    `<span class='highlight' style='color: ${nameColor}'>` +
     messageText.substring(0, messageText.indexOf(":")) +
     "</span>" +
     ": " +

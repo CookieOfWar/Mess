@@ -43,7 +43,7 @@ serverChannel.subscribe((message) => {
       if (message.data["name"] == "") {
         giveNameNRestoreHistory();
       } 
-			//else clientChannel.publish("history", { history: history });
+			else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
       history.push(message.data["text"]);
@@ -51,7 +51,7 @@ serverChannel.subscribe((message) => {
         history.shift();
       }
 			console.log(message);
-      clientChannel.publish("newMessage", { text: message.data["text"] });
+      clientChannel.publish("newMessage", { text: message.data["text"], color: message.data["color"] });
       break;
 
     default:
@@ -68,7 +68,7 @@ function giveNameNRestoreHistory() {
     color: colors[getRandInt(0, colors.length)],
   });
   //console.log("history", history.data);
-  //clientChannel.publish("history", { history: history });
+  clientChannel.publish("history", { history: history });
 
   console.log(`new user connected: ${data1 + " " + data2}`);
 }
@@ -81,4 +81,9 @@ module.exports = app;
 
 function getRandInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+
+function applyCommands(){
+	
 }
