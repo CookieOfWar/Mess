@@ -29,12 +29,10 @@ console.log(serverChannel, clientChannel);
 clientChannel.publish("update", { time: Date.now() });
 //
 
-
 app.post("/sendMessage", (req, res) => {
-//console.log(req);
-	clientChannel.publish("newMessage", { text: req.body["text"] });
-})
-
+  //console.log(req);
+  clientChannel.publish("newMessage", { text: req.body["text"] });
+});
 
 serverChannel.subscribe((message) => {
   switch (message.name) {
@@ -48,7 +46,7 @@ serverChannel.subscribe((message) => {
       if (history.length > 10) {
         history.shift();
       }
-       console.log(message.data["text"]);
+      console.log(message.data["text"]);
       clientChannel.publish("newMessage", { text: message.data["text"] });
       break;
 
@@ -161,3 +159,5 @@ server.listen(port, () => {
 app.post("/send", (req, res) => {
   console.log(req.body);
 });
+
+module.exports = app;
