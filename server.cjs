@@ -1,3 +1,5 @@
+import { adjectives, nouns } from "./adjNnouns";
+
 const path = require("path");
 const express = require("express");
 const http = require("http");
@@ -8,9 +10,14 @@ const server = http.createServer(app);
 const port = 3000;
 
 var history = [];
-const noun = ["Big"];
-const adjectives = ["Penis"];
-var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
+var colors = [
+  "rgba(73, 158, 255, 0.53)",
+  "rgba(234, 73, 255, 0.53)",
+  "rgba(255, 73, 137, 0.53)",
+  "rgba(73, 255, 97, 0.53)",
+  "rgba(73, 255, 200, 0.53)",
+  "rgba(73, 203, 255, 0.53)",
+];
 
 /**
  * НЕ МЕНЯТЬ СЦУККО
@@ -42,7 +49,7 @@ serverChannel.subscribe((message) => {
       if (history.length > 10) {
         history.shift();
       }
-      clientChannel.publish("newMessage", { text: message.data["text"]});
+      clientChannel.publish("newMessage", { text: message.data["text"] });
       break;
 
     default:
@@ -52,10 +59,11 @@ serverChannel.subscribe((message) => {
 });
 
 function giveNameNRestoreHistory() {
-  data1 = noun[0];
-  data2 = adjectives[0];
+  data1 = adjectives[getRandInt(0, adjectives.length)];
+  data2 = nouns[getRandInt(0, nouns.length)];
   clientChannel.publish("setClientName", {
-    name: "Посос", //data1 + " " + data2,
+    name: data1 + " " + data2,
+    color: colors[getRandInt(0, colors.length)],
   });
   //console.log("history", history.data);
   clientChannel.publish("history", { history: history });
@@ -68,3 +76,7 @@ server.listen(port, () => {
 });
 
 module.exports = app;
+
+function getRandInt(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}

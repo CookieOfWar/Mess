@@ -30,7 +30,10 @@ clientChannel.subscribe((message) => {
       break;
 
     case "setClientName":
-      if (clientName == "") clientName = message.data["name"];
+      if (clientName == ""){
+				clientName = message.data["name"];
+				messageColor = message.data["color"];
+			}
       break;
 
     case "history":
@@ -72,7 +75,7 @@ function SendClick() {
 function addMessage(messageText) {
   const message = document.createElement("li"); // style='color: ${'rgba(73, 158, 255, 0.53)'}
   message.innerHTML =
-    `<span class='highlight' '>` +
+    `<span class='highlight' style='color: ${messageColor}'>` +
     messageText.substring(0, messageText.indexOf(":")) +
     "</span>" +
     ": " +
