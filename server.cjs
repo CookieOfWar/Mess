@@ -38,12 +38,12 @@ serverChannel.subscribe((message) => {
       } else clientChannel.publish("history", { history: history });
       break;
     case "sendMessage":
+      console.log(message);
       history.push(message.data["text"]);
-			console.log(message);
+      console.log(message);
       if (history.length > 10) {
         history.shift();
       }
-      console.log(message.data["text"]);
       clientChannel.publish("newMessage", { text: message.data["text"] });
       break;
 
