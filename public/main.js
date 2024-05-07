@@ -46,7 +46,8 @@ clientChannel.subscribe((message) => {
       break;
 
 		case "cls":
-			messages.empty();
+			console.log("emptiness");
+			while(messages.firstChild) messages.removeChild(messages.firstChild);
 			break;
 
     default:

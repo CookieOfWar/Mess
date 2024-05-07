@@ -48,7 +48,7 @@ serverChannel.subscribe((message) => {
       break;
     case "sendMessage":
       if (message.data["tbValue"].startsWith("/")) {
-        applyCommands(message.data["tbValue"].str.substring(1));
+        applyCommands(message.data["tbValue"].substring(1));
       } else {
         history.push(message.data["text"]);
         if (history.length > 10) {
@@ -92,10 +92,10 @@ function getRandInt(min, max) {
 }
 
 function applyCommands(command) {
-	console.log(command);
+  console.log(command);
   switch (command) {
     case "cls":
-      clientChannel.publish("cls");
+      clientChannel.publish("cls", {});
       break;
     case "clearHistory":
       history = [];
