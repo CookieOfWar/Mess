@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
 //Ably
 const key = "3JcURg.fOPmbg:efBqHXpjjaogZHqRcPvOOsPuiyJJt7y0UCTcQwI_GAA";
 const realtime = new Ably.Realtime(key);
-console.log(realtime);
 var serverChannel = realtime.channels.get("server-ch");
 var clientChannel = realtime.channels.get("client-ch");
 clientChannel.publish("update", { time: Date.now() });

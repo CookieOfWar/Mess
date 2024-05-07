@@ -29,6 +29,7 @@ clientChannel.subscribe((message) => {
   switch (message.name) {
     case "newMessage":
       addMessage(message.data["text"]);
+      console.log("newMessage", message.data["text"]);
       break;
 
     case "setClientName":
@@ -54,7 +55,7 @@ sendButton.addEventListener("click", SendClick);
 textbox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     SendClick();
-		console.log("Pressed Enter");
+    console.log("Pressed Enter");
   }
 });
 
