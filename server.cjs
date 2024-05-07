@@ -16,7 +16,7 @@ var colors = ["rgba(73, 158, 255, 0.53)", "rgba(234, 73, 255, 0.53)"];
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
@@ -30,7 +30,7 @@ clientChannel.publish("update", { time: Date.now() });
 //
 
 
-app.post("/sendMessage", (req, res) => {
+app.get("/sendMessage", (req, res) => {
 //console.log(req);
 	clientChannel.publish("newMessage", { text: req.body["text"] });
 })
