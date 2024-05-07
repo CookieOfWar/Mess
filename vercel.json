@@ -11,8 +11,8 @@
   ],
   "routes": [
     {
-      "source": "/(.*)",
-      "destination": "server.cjs"
+      "src": "/(.*)",
+      "dest": "server.cjs"
     }
   ]
 }
