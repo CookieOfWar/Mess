@@ -3,16 +3,21 @@
   "builds": [
     {
       "src": "server.cjs",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**"]
-      }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/((?!.*\\.\\w+$).*)",
       "dest": "server.cjs"
+    },
+    {
+      "src": "/(.+\\.[a-z]+)$",
+      "dest": "/dist/$1"
     }
   ]
 }
